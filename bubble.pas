@@ -28,7 +28,7 @@ BEGIN
 
         FOR i:=1 TO n DO
         BEGIN
-                randArray[i] := Random(n*10)+1;
+                randArray[i] := Random(n+1);
         END;
 
         writeln('Start array:');
