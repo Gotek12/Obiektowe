@@ -7,6 +7,10 @@
             .butts{
                 display: inline-block;
             }
+
+            .im{
+                display: none
+            }
         </style>
     </head>
     <body>
@@ -24,6 +28,7 @@
                                 <input type="text" value="#(book.title)" name="title">
                                 <input type="text" value="#(book.numPages)" name="numPages">
                                 <input type="text" value="#(book.placeOfPublication)" name="placeOfPublication">
+                                <input class = "im" type="text" value="#(book.authorId.id)" name="authorId">
                                 <input type="submit" value="EDIT" />
                             </form>
                     </span>
