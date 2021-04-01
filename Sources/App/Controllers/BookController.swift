@@ -47,7 +47,6 @@ struct BookController: RouteCollection {
         }
     }
 
-    //spróbować zbudować book z tym samym Id jak w create
     func edit(req: Request) throws -> EventLoopFuture<Response> {
         let data = try req.content.decode(Data.self)
         return Book.find(req.parameters.get("bookID"), on: req.db)
@@ -61,19 +60,4 @@ struct BookController: RouteCollection {
             }
         }
     }
-
-    // func edit(req: Request) throws -> EventLoopFuture<Response> {
-    //     let up = try req.content.decode(Book.self)
-    //     return Book.find(req.parameters.get("bookID"), on: req.db)
-    //         .unwrap(or: Abort(.notFound))
-    //         .flatMap { book in
-    //             book.title = up.title
-    //             book.placeOfPublication = up.placeOfPublication
-    //             book.numPages = up.numPages             
-    //             return book.save(on: req.db).map { _ in
-    //                 return req.redirect(to: "/books")
-    //             }
-    //     }
-    // }
-
 }

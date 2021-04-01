@@ -13,6 +13,7 @@ public func configure(_ app: Application) throws {
     app.migrations.add(CreateTodo())
     app.migrations.add(CreateAuthor())
     app.migrations.add(CreateBook())
+    app.migrations.add(CreateLibrary())
 
     app.views.use(.leaf)
 

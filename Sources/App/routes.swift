@@ -24,9 +24,10 @@ func routes(_ app: Application) throws {
     app.post("books", "edit", ":bookID", use: bookController.edit)
     app.post("books", "del", ":bookID", use: bookController.delete)
 
+    //Libraries
     let libraryController = LibraryController()
     app.get("libraries", use: libraryController.listAll)
     app.post("libraries", use: libraryController.create)
-    // app.post("libraries", "edite", ":libraryID", use: libraryController.edit)
+    app.post("libraries", "edit", ":libraryID", use: libraryController.edit)
     app.post("libraries", "del", ":libraryID", use: libraryController.delete)
 }

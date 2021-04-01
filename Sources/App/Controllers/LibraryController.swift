@@ -9,19 +9,24 @@ struct LibraryController: RouteCollection {
         libraries.post(use: create)
         libraries.group(":libraryID") { Library in
             Library.delete(use: delete)
+            Library.post(use: edit)
         }
     }
 
-    func create(req: Request) throws -> EventLoopFuture<Library> {
+    func create(req: Request) throws -> EventLoopFuture<Response> {
         let library = try req.content.decode(Library.self)
-        return library.save(on: req.db).map { library }
+        return library.save(on: req.db).map { _ in
+            return req.redirect(to: "/libraries")
+        }
     }
 
-    func delete(req: Request) throws -> EventLoopFuture<HTTPStatus> {
+    func delete(req: Request) throws -> EventLoopFuture<Response> {
         return Library.find(req.parameters.get("libraryID"), on: req.db)
             .unwrap(or: Abort(.notFound))
             .flatMap { $0.delete(on: req.db) }
-            .transform(to: .ok)
+            .map { _ in
+                return req.redirect(to: "/libraries")
+            }
     }
 
     func listAll(req: Request) throws -> EventLoopFuture<View> {
@@ -32,5 +37,20 @@ struct LibraryController: RouteCollection {
           return req.view.render("libraries", tmp)
         }
       }
+
+      func edit(req: Request) throws -> EventLoopFuture<Response> {
+        let data = try req.content.decode(Library.self)
+        return Library.find(req.parameters.get("libraryID"), on: req.db)
+            .unwrap(or: Abort(.notFound))
+            .flatMap { lib in
+                lib.street = data.street
+                lib.city = data.city
+                lib.streetNumber = data.streetNumber
+                lib.numberOfBooks = data.numberOfBooks
+            return lib.save(on: req.db).map { _ in
+                return req.redirect(to: "/libraries")
+            }
+        }
+    }
 
 }
