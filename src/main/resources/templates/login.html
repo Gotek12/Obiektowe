@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <title>Login</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container" id="cen">
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <form th:action="@{/login}" method="post" class="form-signin" th:object="${user}">
+            <input type="text" name="userName" id="inputUser"
+                   placeholder="username" class="form-control" required autofocus th:field="*{userName}"/>
+            <input type="password" name="password" id="inputPassword"
+                   placeholder="password" class="form-control" required th:field="*{password}"/>
+            <button type="submit" class="btn btn-lg btn-primary btn-block btn-signin">Login</button>
+        </form>
+            <a href="/signup" id="sign_h">Sign up</a>
+            <div th:if="${errorMessage}">
+                <div th:text="${errorMessage}" class="err"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
