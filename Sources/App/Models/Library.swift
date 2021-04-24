@@ -19,7 +19,9 @@ final class Library: Model, Content {
     @Field(key: "numberOfBooks")
     var numberOfBooks: Int
 
-    init() { }
+    init() { 
+        // Intentionally unimplemented...
+    }
 
     init(id: UUID? = nil, street: String, city: String, streetNumber: Int, numberOfBooks: Int ) {
         self.id = id

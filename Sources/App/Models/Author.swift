@@ -19,7 +19,9 @@ final class Author: Model, Content {
     @Children(for: \.$authorId)
     var books: [Book]
 
-    init() {}
+    init() {
+      // Intentionally unimplemented...
+    }
 
     init (id:UUID? = nil, firstName:String, lastName:String, placeOfBirth:String){
       self.firstName = firstName

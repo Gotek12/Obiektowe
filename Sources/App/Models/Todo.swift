@@ -10,7 +10,9 @@ final class Todo: Model, Content {
     @Field(key: "title")
     var title: String
 
-    init() { }
+    init() { 
+        // Intentionally unimplemented...
+    }
 
     init(id: UUID? = nil, title: String) {
         self.id = id

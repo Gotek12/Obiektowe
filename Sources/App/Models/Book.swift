@@ -19,7 +19,9 @@ final class Book: Model, Content {
     @Parent(key: "authorId")
     var authorId: Author
 
-    init() { }
+    init() { 
+        // Intentionally unimplemented...
+    }
 
     init(id: UUID? = nil, title: String, numPages: Int, placeOfPublication: String, authorId: UUID) {
         self.id = id

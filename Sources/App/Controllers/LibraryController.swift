@@ -3,6 +3,8 @@ import Vapor
 
 struct LibraryController: RouteCollection {
 
+   var libpath: String = "/libraries";
+
    func boot(routes: RoutesBuilder) throws {
         let libraries = routes.grouped("libraries")
         libraries.get(use: listAll)
@@ -16,7 +18,7 @@ struct LibraryController: RouteCollection {
     func create(req: Request) throws -> EventLoopFuture<Response> {
         let library = try req.content.decode(Library.self)
         return library.save(on: req.db).map { _ in
-            return req.redirect(to: "/libraries")
+            return req.redirect(to: self.libpath)
         }
     }
 
@@ -25,7 +27,7 @@ struct LibraryController: RouteCollection {
             .unwrap(or: Abort(.notFound))
             .flatMap { $0.delete(on: req.db) }
             .map { _ in
-                return req.redirect(to: "/libraries")
+                return req.redirect(to: self.libpath)
             }
     }
 
@@ -48,7 +50,7 @@ struct LibraryController: RouteCollection {
                 lib.streetNumber = data.streetNumber
                 lib.numberOfBooks = data.numberOfBooks
             return lib.save(on: req.db).map { _ in
-                return req.redirect(to: "/libraries")
+                return req.redirect(to: self.libpath)
             }
         }
     }
