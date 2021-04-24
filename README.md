@@ -5,11 +5,11 @@
 ## Piersze skanowanie sonarCloud
 
 ![before](./readmeImg/dashboard.PNG)
-###Bugs
+### Bugs
 ![bugs](./readmeImg/bug.PNG)
-###Security
+### Security
 ![security](./readmeImg/security.PNG)
-###Code Smells
+### Code Smells
 ![smell1](./readmeImg/smell1.PNG)
 ![smell2](./readmeImg/smell2.PNG)
 
