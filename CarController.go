@@ -8,6 +8,8 @@ import (
 	"fmt"
 )
 
+var notFound string = "404 Not found"
+
 func getHello(c echo.Context) error {
 	echo_.Logger.Info("hello")
 	return c.String(http.StatusOK, "Hello, World!")
@@ -16,7 +18,7 @@ func getHello(c echo.Context) error {
 func getAllCars(c echo.Context) error {
 	cars := takeCars(-1)
 	if cars == nil {
-		return echo.NewHTTPError(http.StatusNotFound, "404 Not found")
+		return echo.NewHTTPError(http.StatusNotFound, notFound)
 	}
 
 	return c.JSON(http.StatusOK, cars)
@@ -31,7 +33,7 @@ func getCar(c echo.Context) error {
 	
 	car := takeCars(id)
 	if car == nil {
-		return echo.NewHTTPError(http.StatusNotFound, "404 Not found")
+		return echo.NewHTTPError(http.StatusNotFound, notFound)
 	}
 
   	return c.JSON(http.StatusOK, car[0])
@@ -40,7 +42,7 @@ func getCar(c echo.Context) error {
 func updateCar(c echo.Context) error {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusNotFound, "404 Not found")
+		return echo.NewHTTPError(http.StatusNotFound, notFound)
 	}
 	what := c.QueryParam("what")
 	nowy := c.QueryParam("nowy")
@@ -111,6 +113,7 @@ func update(id int64, what string, nowy string) *Car{
 func del(id int64) *Car{
 	del := fmt.Sprintf("DELETE FROM car WHERE idCar=%v", id)
 	data, _ := instance.Query(del)
+	delCar := takeCars(id)[0]
 	data.Next()
-	return takeCars(id)[0]
+	return delCar
 }

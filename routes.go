@@ -4,7 +4,8 @@ func CarRoutes(){
 	echo_.GET("/", getHello)
 	echo_.POST("/cars", saveCar)
 	echo_.GET("/cars", getAllCars)
-	echo_.GET("/cars/:id", getCar)
-	echo_.PUT("/cars/:id", updateCar)
-	echo_.DELETE("/cars/:id", deleteCar)
+	var endpointId string = "/cars/:id"
+	echo_.GET(endpointId, getCar)
+	echo_.PUT(endpointId, updateCar)
+	echo_.DELETE(endpointId, deleteCar)
 }

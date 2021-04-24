@@ -11,6 +11,8 @@ type DbCon struct{
 	db *sql.DB
 }
 
+var dbName string = "./database.db"
+
 var instance *DbCon = nil
 
 func Connection() *DbCon {
@@ -27,7 +29,7 @@ func Connection() *DbCon {
 }
 
 func (conn *DbCon) GetConn(){
-	db, err := sql.Open("sqlite3", "./database.db")
+	db, err := sql.Open("sqlite3", "./" + dbName)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -35,9 +37,9 @@ func (conn *DbCon) GetConn(){
 }
 
 func (conn *DbCon) CreateDB(){
-	_, err := os.Stat("database.db")
+	_, err := os.Stat(dbName)
 	if os.IsNotExist(err) {
-		file, err := os.Create("database.db")
+		file, err := os.Create(dbName)
 		if err != nil {
 			log.Fatal(err.Error())
 		}
@@ -49,8 +51,8 @@ func (conn *DbCon) CreateDB(){
 }
 
 func (conn *DbCon) RemoveDB() {
-	os.Remove("database.db")
-	log.Println("Remove database.db")
+	os.Remove(dbName)
+	log.Println("Remove " + dbName)
 }
 
 func (conn *DbCon) CreateCarTable(){
