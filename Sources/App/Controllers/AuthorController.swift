@@ -3,7 +3,7 @@ import Vapor
 
 struct AuthorController: RouteCollection {
 
-   var authorpath: String = "/authors";
+   var authorpath = AppConfig().authorpath
 
    func boot(routes: RoutesBuilder) throws {
         let authors = routes.grouped("authors")

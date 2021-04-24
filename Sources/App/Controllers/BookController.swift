@@ -3,7 +3,7 @@ import Vapor
 
 struct BookController: RouteCollection {
 
-   var bookpath: String = "/books";
+   var bookpath = AppConfig().bookpath
 
    func boot(routes: RoutesBuilder) throws {
         let books = routes.grouped("books")

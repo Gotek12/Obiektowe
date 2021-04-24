@@ -3,7 +3,7 @@ import Vapor
 
 struct LibraryController: RouteCollection {
 
-   var libpath: String = "/libraries";
+   var libpath = AppConfig().libpath
 
    func boot(routes: RoutesBuilder) throws {
         let libraries = routes.grouped("libraries")
