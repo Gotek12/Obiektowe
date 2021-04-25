@@ -3,7 +3,7 @@ import Vapor
 
 struct AuthorController: RouteCollection {
 
-   var authorpath = AppConfig().authorpath
+   var authorpath: String = "authors";
 
    func boot(routes: RoutesBuilder) throws {
         let authors = routes.grouped("authors")
@@ -18,7 +18,7 @@ struct AuthorController: RouteCollection {
     func create(req: Request) throws -> EventLoopFuture<Response> {
         let author = try req.content.decode(Author.self)
         return author.save(on: req.db).map { _ in
-            return req.redirect(to: self.authorpath)
+            return req.redirect(to: "/" + self.authorpath)
         }
     }
 
@@ -27,7 +27,7 @@ struct AuthorController: RouteCollection {
             .unwrap(or: Abort(.notFound))
             .flatMap { $0.delete(on: req.db) }
             .map { _ in
-                return req.redirect(to: self.authorpath)
+                return req.redirect(to: "/" + self.authorpath)
             }
     }
 
@@ -36,7 +36,7 @@ struct AuthorController: RouteCollection {
         return authorsList.flatMap { authors in
           print(authors)
           let tmp = ["authorsList": authors]
-          return req.view.render("authors", tmp)
+          return req.view.render(self.authorpath, tmp)
         }
     }
 
@@ -51,7 +51,7 @@ struct AuthorController: RouteCollection {
                 author.placeOfBirth = up.placeOfBirth
                 print(author)
                 return author.save(on: req.db).map { _ in
-                    return req.redirect(to: self.authorpath)
+                    return req.redirect(to: "/" + self.authorpath)
                 }
         }
     }

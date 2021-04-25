@@ -3,7 +3,7 @@ import Vapor
 
 struct BookController: RouteCollection {
 
-   var bookpath = AppConfig().bookpath
+   var bookpath: String = "books";
 
    func boot(routes: RoutesBuilder) throws {
         let books = routes.grouped("books")
@@ -26,7 +26,7 @@ struct BookController: RouteCollection {
         let data = try req.content.decode(Data.self)
         let book = Book(title: data.title, numPages: data.numPages, placeOfPublication: data.placeOfPublication, authorId: data.authorId)
         return book.save(on: req.db).map { _ in
-            return req.redirect(to: self.bookpath)
+            return req.redirect(to: "/" + self.bookpath)
         }
     }
 
@@ -35,7 +35,7 @@ struct BookController: RouteCollection {
             .unwrap(or: Abort(.notFound))
             .flatMap { $0.delete(on: req.db) }
             .map { _ in
-                return req.redirect(to: self.bookpath)
+                return req.redirect(to: "/" +  self.bookpath)
             }
     }
 
@@ -45,7 +45,7 @@ struct BookController: RouteCollection {
         return booksList.flatMap { books in
           print(books)
           let tmp = ["booksList": books]
-          return req.view.render("books", tmp)
+          return req.view.render(self.bookpath, tmp)
         }
     }
 
@@ -58,7 +58,7 @@ struct BookController: RouteCollection {
                 book.placeOfPublication = data.placeOfPublication
                 book.numPages = data.numPages
             return book.save(on: req.db).map { _ in
-                return req.redirect(to: self.bookpath)
+                return req.redirect(to: "/" + self.bookpath)
             }
         }
     }
