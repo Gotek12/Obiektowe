@@ -9,6 +9,7 @@ plugins {
     kotlin("plugin.jpa") version "1.4.31"
     id("org.springframework.experimental.aot") version "0.9.1"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.4.32"
+    id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
 }
 
 group = "pl.edu"

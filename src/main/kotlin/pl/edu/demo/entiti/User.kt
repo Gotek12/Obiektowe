@@ -7,15 +7,15 @@ import lombok.Setter
 @Getter
 @Setter
 @AllArgsConstructor
-open class User (
-        var userName: String = "",
-        var password: String = ""
-        ){
-        var email: String = ""
+open class User(
+    var userName: String = "",
+    var password: String = ""
+) {
+    var email: String = ""
 
-        constructor(user: User) : this(user.userName, user.password){
-                userName = user.userName
-                password = user.password
-                email = user.email
-        }
+    constructor(user: User) : this(user.userName, user.password) {
+        userName = user.userName
+        password = user.password
+        email = user.email
+    }
 }

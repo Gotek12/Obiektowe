@@ -17,7 +17,7 @@ import pl.edu.demo.service.CreateUserService
 @RequestMapping("/")
 class SignInController {
     private val logger = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME)
-    private var logUser : AppUser? = null
+    private var logUser: AppUser? = null
 
     @Autowired
     private lateinit var auth: AuthService
@@ -56,7 +56,7 @@ class SignInController {
     fun login(user: User, model: Model): String {
         val appUser = auth.checkUser(user)
 
-        if(appUser == null){
+        if (appUser == null) {
             model.addAttribute("errorMessage", "wrong login or password")
             return "login"
         }
@@ -67,8 +67,8 @@ class SignInController {
     }
 
     @GetMapping("/main")
-    fun mainPage(model: Model): String{
-        if(logUser == null){
+    fun mainPage(model: Model): String {
+        if (logUser == null) {
             return "index_not"
         }
         model.addAttribute("user", logUser)

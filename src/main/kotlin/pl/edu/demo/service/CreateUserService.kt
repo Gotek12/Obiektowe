@@ -12,7 +12,7 @@ class CreateUserService {
     @Autowired
     private lateinit var userRepository: AppUserRepository
 
-    fun addUser(user: User): AppUser{
+    fun addUser(user: User): AppUser {
         val newUser = AppUser(user.userName, user.email, user.password)
         userRepository.save(newUser)
         return newUser
