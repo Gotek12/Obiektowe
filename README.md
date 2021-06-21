@@ -6,3 +6,4 @@
 - [Kotlin spring boot](https://github.com/Gotek12/Obiektowe/tree/lab4) lab4
 - [React with Mobx](https://github.com/Gotek12/Obiektowe/tree/lab5) lab5
 - [Flask azure](https://github.com/Gotek12/Obiektowe/tree/lab6) lab6
+- [Cypress](https://github.com/Gotek12/Obiektowe/tree/lab7) lab7
